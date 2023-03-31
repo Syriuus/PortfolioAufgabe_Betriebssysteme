@@ -42,6 +42,7 @@ public class SimulatedProcess {
 		return ankunftszeit;
 	}
 	
+	@Override
 	public String toString() {
 		return this.getId() + "     " + this.getLaufzeit() + "     " +  this.getPriorität() + "     " +  this.getVerbleibendeLaufzeit();
 	}
