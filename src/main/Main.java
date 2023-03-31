@@ -13,7 +13,7 @@ public class Main {
 		ArrayList<SimulatedProcess> List =  PrioScheduling.order(RandomTasks.getRandom(5));
 		
 		for(SimulatedProcess i : List) {
-			System.out.println(i);
+			System.out.println(i); // dies ist der Test ob Mac besser ist als Windows
 		}
 		
 
