@@ -1,2 +1,2 @@
 # PortfolioAufgabe_Betriebssysteme
- Portfolio Aufgabe für Betriebssysteme mit Ardit, TIm, Noel, Maurice, Maarten
+ Portfolio Aufgabe für Betriebssysteme mit Ardit, Tim, Noel, Maurice, Maarten
