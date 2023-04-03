@@ -9,7 +9,8 @@ public class AttributeComparator implements Comparator<SimulatedProcess> {
 	/*
 	 * 0 -> Earliest Deadline First
 	 * 1 -> Shortest Job First
-	 * 2 -> Longest Job First
+	 * 2 -> Longest Job First´
+	 * 3 -> Priority Sort
 	 */
 	
 	public AttributeComparator (int attribute) {
