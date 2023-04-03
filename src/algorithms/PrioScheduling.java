@@ -18,7 +18,7 @@ public class PrioScheduling{
         ArrayList<SimulatedProcess> sortedList = new ArrayList<>();
         
 		for(SimulatedProcess i : Liste) { // UUID und Prio in extra Map
-			map.put(i.getId(), i.getPriorität());
+			map.put(i.getId(), i.getPriority());
 		}
 		
 		for (Entry<Character, Integer> entry : map.entrySet()) { // Prio in eine ArrayList

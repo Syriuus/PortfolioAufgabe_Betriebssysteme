@@ -5,51 +5,57 @@ import java.util.Objects;
 public class SimulatedProcess {
 	
 	private Character id;
-	private int laufzeit;
-	private int priorität;
-	private int ankunftszeit;
-	private int verbleibendeLaufzeit;
+	private int runtime;
+	private int priority;
+	private int arrivaltime;
+	private int remainingRuntime;
+	private int deadline;
 
-	public SimulatedProcess(Character ID, int Laufzeit, int Priorität, int Ankunftszeit, int VerbleibendeLaufzeit) {
+	public SimulatedProcess(Character ID, int Runtime, int Priority, int Arrivaltime, int Deadline) {
 		this.id = ID;
-		this.laufzeit = Laufzeit;
-		this.priorität = Priorität;
-		this.ankunftszeit = Ankunftszeit;
-		this.verbleibendeLaufzeit = VerbleibendeLaufzeit;
+		this.runtime = Runtime;
+		this.priority = Priority;
+		this.arrivaltime = Arrivaltime;
+		this.remainingRuntime = Runtime;
+		this.deadline = Deadline;
+	}
+	
+	public int getRemainingRuntime() {
+		return remainingRuntime;
 	}
 
-	public int getVerbleibendeLaufzeit() {
-		return verbleibendeLaufzeit;
-	}
-
-	public void setVerbleibendeLaufzeit(int verbleibendeLaufzeit) {
-		this.verbleibendeLaufzeit = verbleibendeLaufzeit;
+	public void setRemainingRuntime(int remainingRuntime) {
+		this.remainingRuntime = remainingRuntime;
 	}
 
 	public Character getId() {
 		return id;
 	}
 
-	public int getLaufzeit() {
-		return laufzeit;
+	public int getRuntime() {
+		return runtime;
 	}
 
-	public int getPriorität() {
-		return priorität;
+	public int getPriority() {
+		return priority;
 	}
 
-	public int getAnkunftszeit() {
-		return ankunftszeit;
+	public int getArrivaltime() {
+		return arrivaltime;
 	}
-	
+
+	public int getDeadline() {
+		return deadline;
+	}
+
 	@Override
 	public String toString() {
-		return this.getId() + "     " + this.getLaufzeit() + "     " +  this.getPriorität() + "     " +  this.getVerbleibendeLaufzeit();
+		return this.getId() + "     " + this.getRuntime() + "     " +  this.getPriority();
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ankunftszeit, id, laufzeit, priorität, verbleibendeLaufzeit);
+		return Objects.hash(arrivaltime, id, runtime, priority, remainingRuntime);
 	}
 
 	@Override
@@ -61,8 +67,8 @@ public class SimulatedProcess {
 		if (getClass() != obj.getClass())
 			return false;
 		SimulatedProcess other = (SimulatedProcess) obj;
-		return ankunftszeit == other.ankunftszeit && Objects.equals(id, other.id) && laufzeit == other.laufzeit
-				&& priorität == other.priorität && verbleibendeLaufzeit == other.verbleibendeLaufzeit;
+		return arrivaltime == other.arrivaltime && Objects.equals(id, other.id) && runtime == other.runtime
+				&& priority == other.priority && remainingRuntime == other.remainingRuntime;
 	}
 
 }
