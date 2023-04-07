@@ -20,7 +20,7 @@ public static ArrayList<SimulatedProcess> getRandom(int count) throws Exception 
 			int randomDeadline = random.nextInt(8, 40);
 			ProcessList.add(new SimulatedProcess((char) (i + 65), randomRuntime, randomPriority, total_arrival_time, randomDeadline));
 			if(randomRuntime < 8) {
-				total_arrival_time += random.nextInt(1, randomRuntime);
+				total_arrival_time += random.nextInt(0, randomRuntime);
 			}
 			else {
 				total_arrival_time += random.nextInt(1, 7);
