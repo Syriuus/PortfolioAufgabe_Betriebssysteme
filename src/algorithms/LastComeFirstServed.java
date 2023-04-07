@@ -40,4 +40,21 @@ public static ArrayList<Character> order(ArrayList<SimulatedProcess> List) {
 }
 }
 
+/* Ein Prozess trifft zum Zeitpunkt 0 ein und hat eine Runtime. Sobald dieser Prozess fertig ist
+wird der aktuellst-eingetroffene Prozess angefangen.
 
+Beispiel:
+ID, Laufzeit, Prio, Arrival
+J     16     7     37
+I     12     17     35
+H     14     10     30
+G     1     2     25
+F     19     1     19
+E     3     9     16
+D     16     14     10
+C     19     13     7
+B     6     11     4
+A     11     9     0
+
+A dauert 11ms, es wird also der Prozess mit <=11ms Arrival gesucht und als nächstes Ausgegeben/Angefangen
+*/

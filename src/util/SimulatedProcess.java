@@ -50,7 +50,7 @@ public class SimulatedProcess {
 
 	@Override
 	public String toString() {
-		return this.getId() + "     " + this.getRuntime() + "     " +  this.getPriority() + "     " +  this.getArrivaltime();
+		return this.getId() + "     " + this.getRuntime() + "     " +  this.getPriority() + "     " + this.getArrivaltime();
 	}
 
 	@Override
