@@ -3,11 +3,11 @@ package util;
 import java.util.Objects;
 
 public class SimulatedProcess {
-	
+
 	private Character id;
 	private int runtime;
-	private int priority;
-	private int arrivaltime;
+	private int priority; //Prioritätengesteuertes Scheduling. 
+	private int arrivaltime; 
 	private int remainingRuntime;
 	private int deadline;
 
@@ -19,7 +19,7 @@ public class SimulatedProcess {
 		this.remainingRuntime = Runtime;
 		this.deadline = Deadline;
 	}
-	
+
 	public int getRemainingRuntime() {
 		return remainingRuntime;
 	}
@@ -47,10 +47,15 @@ public class SimulatedProcess {
 	public int getDeadline() {
 		return deadline;
 	}
+	public void RemainingRuntimeMinusOne()
+	{
+		this.remainingRuntime = this.remainingRuntime-1;
+	}
 
 	@Override
 	public String toString() {
-		return this.getId() + "     " + this.getRuntime() + "     " +  this.getPriority() + "     " + this.getArrivaltime();
+		return this.getId() + "     " + this.getRuntime() + "     " + this.getPriority() + "     "
+				+ this.getArrivaltime() + "     " + this.getDeadline();
 	}
 
 	@Override

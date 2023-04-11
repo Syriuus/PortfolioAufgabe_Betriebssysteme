@@ -1,88 +1,136 @@
 package algorithms;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
 import util.AttributeComparator;
 import util.SimulatedProcess;
 
-
-
 public class LongestRemainingTimeFirstScheduling {
+	public static ArrayList<Character> order(ArrayList<SimulatedProcess> processList) {
+	ArrayList<Character> IDOutputListe = new ArrayList<>();
+	int Systemtime = 0;
+	
+	SimulatedProcess LastProcessInList = processList.get(processList.size() - 1);
+	int MaxSystemtime = LastProcessInList.getArrivaltime() + LastProcessInList.getRuntime();
+	int RuntimeAddTemp = 0;
+	for (SimulatedProcess i : processList) {
+		RuntimeAddTemp += i.getRuntime();
+	}
+	if (RuntimeAddTemp > MaxSystemtime)
+		MaxSystemtime = RuntimeAddTemp;
 
-	static ArrayList<SimulatedProcess> CurrentList = new ArrayList<SimulatedProcess>();
+	
+	SimulatedProcess NextProcess = new SimulatedProcess('x',0,0,0,0);
+	while(Systemtime < MaxSystemtime)
+	{
+		for(SimulatedProcess i: processList) {
+			if(i.getArrivaltime() == Systemtime)
+				for(SimulatedProcess j: processList) {
+					if (j.getArrivaltime() > Systemtime)
+						continue;
+
+					if (j.getRemainingRuntime() > NextProcess.getRemainingRuntime())	NextProcess = j;
+
+				
+				}
+		}
+		IDOutputListe.add(NextProcess.getId());
+		NextProcess.RemainingRuntimeMinusOne();
+		if (NextProcess.getRemainingRuntime() <= 0) {			
+			processList.remove(NextProcess);
+			NextProcess = new SimulatedProcess('x',0,0,0,0);
+			for(SimulatedProcess j: processList) {
+				if (j.getArrivaltime() > Systemtime)
+					continue;
+
+				if (j.getRemainingRuntime() > NextProcess.getRemainingRuntime())	NextProcess = j;
+
+			
+			}
+		}
+		Systemtime++;
+	}
+	return IDOutputListe;
+	/*static ArrayList<SimulatedProcess> CurrentList = new ArrayList<SimulatedProcess>();
 	static SimulatedProcess Running = null;
 	static int Systemtime;
-	
-	public static ArrayList<SimulatedProcess> order( ArrayList<SimulatedProcess> unsortedProcessList)
+
+	public static ArrayList<SimulatedProcess> order(ArrayList<SimulatedProcess> unsortedProcessList)
 	{
-		   ArrayList<SimulatedProcess> OutputArray = new ArrayList<SimulatedProcess>();
-		for(SimulatedProcess X : unsortedProcessList)
+		
+		ArrayList<SimulatedProcess> OutputArray = new ArrayList<SimulatedProcess>();
+		for (SimulatedProcess X : unsortedProcessList)
 		{
 			System.out.println(X.getId() + "/" + X.getRuntime() + "/" + X.getArrivaltime());
 		}
-		
+
 		Systemtime = 0;
 		Running = unsortedProcessList.get(0);
-		
-		while(Systemtime < 100)//Scheduling dauer genau bestimmen.
+
+		while (Systemtime < 100)// Scheduling dauer genau bestimmen.
 		{
-		for(SimulatedProcess SP : unsortedProcessList) //für jeden Prozess wird die Arrivaltime mit der aktuellen Systemzeit 
-			//verglichen. NewProcessArriving macht das update.
-        {
-        	
-        	if(Systemtime == SP.getArrivaltime()) 
-        	{		
-        		 NewProcessArriving(SP);
-        	}
-        	
-        }
-		
-        System.out.print(Running.getId());
-        OutputArray.add(Systemtime, Running);
-        System.out.print(Running.getRemainingRuntime());
-        System.out.println(Running.getArrivaltime());
-        Running.setRemainingRuntime(Running.getRemainingRuntime() - 1);
-        if(Running.getRemainingRuntime() <= 0) 
-        	{
-        		CurrentList.remove(Running);
-        		unsortedProcessList.remove(Running);
-        		if(CurrentList.isEmpty()&& unsortedProcessList.isEmpty())
-        		{
-        			return unsortedProcessList = OutputArray;
-        		}
-        		SimulatedProcess LongestRemainingTime = CurrentList.get(0);
-        		
-        		for(SimulatedProcess j : CurrentList)
-        		{
-        			if (j.getRemainingRuntime() < LongestRemainingTime.getRemainingRuntime())
-        			{
-        				LongestRemainingTime = j;
-        			}
-        		}
-        		Running = CurrentList.get(CurrentList.indexOf(LongestRemainingTime));   
-        	}
-        Systemtime++;
-		
-		//printausgaben durch array[Systemtime] in reihenfolge eingeben anstatt es zu printen
-        
-		
+			for (SimulatedProcess SP : unsortedProcessList) // für jeden Prozess wird die Arrivaltime mit der aktuellen
+															// Systemzeit
+			// verglichen. NewProcessArriving macht das update.
+			{
+
+				if (Systemtime == SP.getArrivaltime())
+				{
+					NewProcessArriving(SP);
+				}
+
+			}
+
+			System.out.print(Running.getId());
+			OutputArray.add(Systemtime, Running);
+			System.out.print(Running.getRemainingRuntime());
+			System.out.println(Running.getArrivaltime());
+			Running.setRemainingRuntime(Running.getRemainingRuntime() - 1);
+			if (Running.getRemainingRuntime() <= 0) 
+			{
+				CurrentList.remove(Running);
+				unsortedProcessList.remove(Running);
+				if (CurrentList.isEmpty() && unsortedProcessList.isEmpty())
+				{
+					return unsortedProcessList = OutputArray;
+				}
+				SimulatedProcess LongestRemainingTime = CurrentList.get(0);
+
+				for (SimulatedProcess j : CurrentList) {
+					if (j.getRemainingRuntime() < LongestRemainingTime.getRemainingRuntime()) 
+					{
+						LongestRemainingTime = j;
+					}
+				}
+				Running = CurrentList.get(CurrentList.indexOf(LongestRemainingTime));
+			}
+			Systemtime++;
+
+			// printausgaben durch array[Systemtime] in reihenfolge eingeben anstatt es zu
+			// printen
+
 		}
 		return unsortedProcessList;
-		
-	}
-	
-	private static void NewProcessArriving( SimulatedProcess SP)
-	{
-		CurrentList.add(SP);
-	
-		SimulatedProcess LongestRemainingTime = CurrentList.get(0);
-		for(SimulatedProcess i : CurrentList) {
-				
-				if(LongestRemainingTime.getRemainingRuntime() > i.getRemainingRuntime()) LongestRemainingTime = i;
-				if(SP.getRemainingRuntime() <= 0) CurrentList.remove(SP);
-		}
-		Running = LongestRemainingTime;
-		//update, dass current process geändert wird. 
+
 	}
 
+	private static void NewProcessArriving(SimulatedProcess SP)
+	{
+		CurrentList.add(SP);
+
+		SimulatedProcess LongestRemainingTime = CurrentList.get(0);
+		for (SimulatedProcess i : CurrentList)
+		{
+
+			if (LongestRemainingTime.getRemainingRuntime() > i.getRemainingRuntime())
+				LongestRemainingTime = i;
+			if (SP.getRemainingRuntime() <= 0)
+				CurrentList.remove(SP);
+		}
+		Running = LongestRemainingTime;
+		// update, dass current process geändert wird.
+	}
+*/
+}
 }

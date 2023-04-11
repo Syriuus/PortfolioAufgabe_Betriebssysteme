@@ -6,9 +6,9 @@ import java.util.Iterator;
 
 import util.SimulatedProcess;
 
-public class LastComeFirstServed {
+public class FirstComeFirstServed {
 
-	private static int passedTime = 0;
+	//private static int passedTime = 0;
 
 	public static ArrayList<Character> order(ArrayList<SimulatedProcess> processList) {
 		ArrayList<Character> IDOutputListe = new ArrayList<>();
@@ -26,7 +26,7 @@ public class LastComeFirstServed {
 		if (RuntimeAddTemp > MaxSystemtime) MaxSystemtime = RuntimeAddTemp;
 		
 				boolean Blocked = false;
-		SimulatedProcess NextProcess = new SimulatedProcess('x',0,0,-1,0);
+		SimulatedProcess NextProcess = new SimulatedProcess('x',0,0,100,0);
 		while(Systemtime < MaxSystemtime)
 		{
 			 //Leerlaufprozess.
@@ -35,13 +35,13 @@ public class LastComeFirstServed {
 			
 			if(!Blocked) 
 			{
-				NextProcess = new SimulatedProcess('x',0,0,-1,0);
+				NextProcess = new SimulatedProcess('x',0,0,100,0);
 			for(SimulatedProcess i : processList)
 			{
 				
 				if(i.getArrivaltime() > Systemtime) continue;
 				
-				if(i.getArrivaltime() > NextProcess.getArrivaltime())
+				if(i.getArrivaltime() < NextProcess.getArrivaltime())
 					{
 						NextProcess = i; 
 					}

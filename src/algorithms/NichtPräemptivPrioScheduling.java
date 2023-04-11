@@ -6,7 +6,7 @@ import java.util.Collections;
 import util.AttributeComparator;
 import util.SimulatedProcess;
 
-public class LongestJobFirstScheduling {
+public class NichtPräemptivPrioScheduling {
 	public static ArrayList<Character> order(ArrayList<SimulatedProcess> processList) {
 		ArrayList<Character> IDOutputListe = new ArrayList<>();
 
@@ -22,6 +22,7 @@ public class LongestJobFirstScheduling {
 		if (RuntimeAddTemp > MaxSystemtime)
 			MaxSystemtime = RuntimeAddTemp;
 
+		
 		boolean Blocked = false;
 		SimulatedProcess NextProcess = new SimulatedProcess('x', 0, 0, 0, 0);
 		while (Systemtime < MaxSystemtime) {
@@ -34,12 +35,14 @@ public class LongestJobFirstScheduling {
 					if (i.getArrivaltime() > Systemtime)
 						continue;
 
-					if (i.getRuntime() > NextProcess.getRuntime())	NextProcess = i;
+					if (i.getDeadline() > NextProcess.getDeadline()) {
+						NextProcess = i;
+					}
 
 				}
 				Blocked = true;
 			}
-			//if(NextProcess.getId()=='x') NextProcess.setRemainingRuntime(0);
+
 			IDOutputListe.add(NextProcess.getId());
 			NextProcess.RemainingRuntimeMinusOne();
 			if (NextProcess.getRemainingRuntime() <= 0) {
@@ -49,6 +52,7 @@ public class LongestJobFirstScheduling {
 
 			Systemtime++;
 		}
+
 		return IDOutputListe;
 	}
 }
