@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import util.AttributeComparator;
+import util.Calculate;
 import util.SimulatedProcess;
 
 public class PräemptivEDFScheduling {
@@ -12,52 +13,36 @@ public class PräemptivEDFScheduling {
 		ArrayList<Character> IDOutputListe = new ArrayList<>();
 		
 		int Systemtime = 0;
-		
-		//Folgender Block dient der Bestimmung der maximalen Systemzeit. 
-		SimulatedProcess LastProcessInList = processList.get(processList.size()-1);
-		int MaxSystemtime = LastProcessInList.getArrivaltime() + LastProcessInList.getRuntime();
-		int RuntimeAddTemp = 0;
-		for(SimulatedProcess i : processList)
-		{
-			RuntimeAddTemp += i.getRuntime();
-		}
-		if (RuntimeAddTemp > MaxSystemtime) MaxSystemtime = RuntimeAddTemp;
-		
-		
-		
+		int MaxSystemtime = Calculate.MaxSystemtime(processList);
+				
 		//Folgender Block Arbeitet jedes Zeitframe einzeln ab.
 		SimulatedProcess NextProcess = new SimulatedProcess('x',0,0,0,100);
 		while(Systemtime < MaxSystemtime)
 		{
 			 //Leerlaufprozess.
 		
-			for(SimulatedProcess i: processList) {
-				if(i.getArrivaltime() == Systemtime)
-					for(SimulatedProcess j: processList) {
-						if (j.getArrivaltime() > Systemtime)
-							continue;
-
-						if (j.getDeadline() < NextProcess.getDeadline())	NextProcess = j;
-
-					
-					}
-			}
+			if(Calculate.ProcessArrived(processList, Systemtime)) NextProcess = CalculateNextProcess(processList,Systemtime);
 			IDOutputListe.add(NextProcess.getId());
 			NextProcess.RemainingRuntimeMinusOne();
 			if(NextProcess.getRemainingRuntime() <= 0)
 				{
 				processList.remove(NextProcess);
-				NextProcess = new SimulatedProcess('x',0,0,0,100);
-				for(SimulatedProcess j: processList) {
-					if (j.getArrivaltime() > Systemtime)
-						continue;
-
-					if (j.getDeadline() < NextProcess.getDeadline())	NextProcess = j;
-			
-				}
+				NextProcess = CalculateNextProcess(processList,Systemtime);
 				}
 			Systemtime++;
 		}
 		return IDOutputListe;
 	}
+	
+	private static SimulatedProcess CalculateNextProcess(ArrayList<SimulatedProcess> processList, int Systemtime )
+	{		
+		SimulatedProcess NextProcess = new SimulatedProcess('x',100,0,0,0);	//IdleProcess
+	for(SimulatedProcess j: processList) {
+				if (j.getArrivaltime() > Systemtime) continue;				
+				if (j.getDeadline() < NextProcess.getDeadline())	NextProcess = j;
+			
+	}
+	if(NextProcess.getId()=='x') NextProcess.setRemainingRuntime(0);
+	return NextProcess;
+}
 }

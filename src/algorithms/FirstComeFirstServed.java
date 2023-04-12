@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
+import util.Calculate;
 import util.SimulatedProcess;
 
 public class FirstComeFirstServed {
@@ -14,42 +15,19 @@ public class FirstComeFirstServed {
 		ArrayList<Character> IDOutputListe = new ArrayList<>();
 		
 		int Systemtime = 0;
-		
-		//Folgender Block dient der Bestimmung der maximalen Systemzeit. 
-		SimulatedProcess LastProcessInList = processList.get(processList.size()-1);
-		int MaxSystemtime = LastProcessInList.getArrivaltime() + LastProcessInList.getRuntime();
-		int RuntimeAddTemp = 0;
-		for(SimulatedProcess i : processList)
-		{
-			RuntimeAddTemp += i.getRuntime();
-		}
-		if (RuntimeAddTemp > MaxSystemtime) MaxSystemtime = RuntimeAddTemp;
+		int MaxSystemtime = Calculate.MaxSystemtime(processList);
 		
 				boolean Blocked = false;
 		SimulatedProcess NextProcess = new SimulatedProcess('x',0,0,100,0);
 		while(Systemtime < MaxSystemtime)
 		{
-			 //Leerlaufprozess.
-			
-		
-			
-			if(!Blocked) 
-			{
-				NextProcess = new SimulatedProcess('x',0,0,100,0);
-			for(SimulatedProcess i : processList)
-			{
-				
-				if(i.getArrivaltime() > Systemtime) continue;
-				
-				if(i.getArrivaltime() < NextProcess.getArrivaltime())
-					{
-						NextProcess = i; 
-					}
-				
 
+			if (!Blocked) 
+			{
+				if(Calculate.ProcessArrived(processList,Systemtime)) NextProcess = CalculateNextProcess(processList, Systemtime);
+				Blocked = true;
 			}
-			Blocked = true;
-			}	
+			
 			IDOutputListe.add(NextProcess.getId());
 			NextProcess.RemainingRuntimeMinusOne();
 			if(NextProcess.getRemainingRuntime() <= 0) 
@@ -61,6 +39,24 @@ public class FirstComeFirstServed {
 			Systemtime++;
 		}
 		return IDOutputListe;
+}
+
+private static SimulatedProcess CalculateNextProcess(ArrayList<SimulatedProcess> processList, int Systemtime )
+{
+SimulatedProcess NextProcess = new SimulatedProcess('x',0,0,100,0);
+for(SimulatedProcess i : processList)
+{
+	
+	if(i.getArrivaltime() > Systemtime) continue;
+	
+	if(i.getArrivaltime() < NextProcess.getArrivaltime())
+		{
+			NextProcess = i; 
+		}
+}
+return NextProcess;
+}
+}
 		/*ArrayList<Character> charList = new ArrayList<Character>();
 		Iterator<SimulatedProcess> iterator = List.iterator();
 		SimulatedProcess previousProcess = null;
@@ -87,8 +83,7 @@ public class FirstComeFirstServed {
 
 		return charList;
 	}*/
-}
-}
+
 /*
  * Ein Prozess trifft zum Zeitpunkt 0 ein und hat eine Runtime. Sobald dieser
  * Prozess fertig ist wird der aktuellst-eingetroffene Prozess angefangen.

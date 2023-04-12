@@ -1,6 +1,8 @@
 package algorithms;
 
 import java.util.ArrayList;
+
+import util.Calculate;
 import util.SimulatedProcess;
 
 public class RoundRobinScheduling {
@@ -9,17 +11,7 @@ public class RoundRobinScheduling {
 		ArrayList<Character> IDOutputListe = new ArrayList<>();
 		ArrayList<SimulatedProcess> RoundRobinListe = new ArrayList<>();
 		int Systemtime = 0;
-
-		// Folgender Block dient der Bestimmung der maximalen Systemzeit.
-		SimulatedProcess LastProcessInList = processList.get(processList.size() - 1);
-		int MaxSystemtime = LastProcessInList.getArrivaltime() + LastProcessInList.getRuntime();
-		int RuntimeAddTemp = 0;
-
-		for (SimulatedProcess i : processList) {
-			RuntimeAddTemp += i.getRuntime();
-		}
-		if (RuntimeAddTemp > MaxSystemtime)
-			MaxSystemtime = RuntimeAddTemp;
+		int MaxSystemtime = Calculate.MaxSystemtime(processList);
 
 		SimulatedProcess NextProcess = new SimulatedProcess('x', 0, 0, 0, 0);
 

@@ -4,54 +4,44 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import util.AttributeComparator;
+import util.Calculate;
 import util.SimulatedProcess;
 
 public class LongestRemainingTimeFirstScheduling {
 	public static ArrayList<Character> order(ArrayList<SimulatedProcess> processList) {
 	ArrayList<Character> IDOutputListe = new ArrayList<>();
 	int Systemtime = 0;
-	
-	SimulatedProcess LastProcessInList = processList.get(processList.size() - 1);
-	int MaxSystemtime = LastProcessInList.getArrivaltime() + LastProcessInList.getRuntime();
-	int RuntimeAddTemp = 0;
-	for (SimulatedProcess i : processList) {
-		RuntimeAddTemp += i.getRuntime();
-	}
-	if (RuntimeAddTemp > MaxSystemtime)
-		MaxSystemtime = RuntimeAddTemp;
+	int MaxSystemtime = Calculate.MaxSystemtime(processList);
 
 	
 	SimulatedProcess NextProcess = new SimulatedProcess('x',0,0,0,0);
 	while(Systemtime < MaxSystemtime)
 	{
-		for(SimulatedProcess i: processList) {
-			if(i.getArrivaltime() == Systemtime)
-				for(SimulatedProcess j: processList) {
-					if (j.getArrivaltime() > Systemtime)
-						continue;
-
-					if (j.getRemainingRuntime() > NextProcess.getRemainingRuntime())	NextProcess = j;
-
-				
-				}
-		}
+		if(Calculate.ProcessArrived(processList, Systemtime))NextProcess = CalculateNextProcess(processList,Systemtime);
+		
 		IDOutputListe.add(NextProcess.getId());
 		NextProcess.RemainingRuntimeMinusOne();
 		if (NextProcess.getRemainingRuntime() <= 0) {			
 			processList.remove(NextProcess);
-			NextProcess = new SimulatedProcess('x',0,0,0,0);
-			for(SimulatedProcess j: processList) {
-				if (j.getArrivaltime() > Systemtime)
-					continue;
-
-				if (j.getRemainingRuntime() > NextProcess.getRemainingRuntime())	NextProcess = j;
-
-			
-			}
+			NextProcess = CalculateNextProcess(processList,Systemtime);
 		}
 		Systemtime++;
 	}
 	return IDOutputListe;
+	}
+	
+	private static SimulatedProcess CalculateNextProcess(ArrayList<SimulatedProcess> processList, int Systemtime )
+	{	
+	SimulatedProcess NextProcess = new SimulatedProcess('x',0,0,0,0);
+	for(SimulatedProcess j: processList) {
+		if (j.getArrivaltime() > Systemtime)	continue;
+		if (j.getRemainingRuntime() > NextProcess.getRemainingRuntime())	NextProcess = j;
+
+	}
+
+return NextProcess;
+	}
+}
 	/*static ArrayList<SimulatedProcess> CurrentList = new ArrayList<SimulatedProcess>();
 	static SimulatedProcess Running = null;
 	static int Systemtime;
@@ -132,5 +122,4 @@ public class LongestRemainingTimeFirstScheduling {
 		// update, dass current process geändert wird.
 	}
 */
-}
-}
+
