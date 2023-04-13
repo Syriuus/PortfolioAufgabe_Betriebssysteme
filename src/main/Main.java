@@ -11,6 +11,8 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 
 		ArrayList<SimulatedProcess> List2 = RandomTasks.getRandom(10);
+		
+		System.out.println("ID, Laufzeit, Prio, Arrival");
 
 		for (SimulatedProcess i : List2) {
 			System.out.println(i); // dies ist der Test ob Mac besser ist als Windows
