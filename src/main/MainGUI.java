@@ -26,7 +26,14 @@ public class MainGUI {
         panel.setLayout(new BorderLayout());
 
         JButton runButton = new JButton("Run");
-        runButton.addActionListener(e -> runAlgorithm());
+        runButton.addActionListener(e -> {
+			try {
+				runAlgorithm();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 
         outputArea = new JTextArea();
         outputArea.setEditable(false);
@@ -43,7 +50,7 @@ public class MainGUI {
         frame.setVisible(true);
     }
 
-    private void runAlgorithm() {
+    private void runAlgorithm() throws Exception {
         ArrayList<SimulatedProcess> List2 = RandomTasks.getRandom(10);
 
         StringBuilder sb = new StringBuilder();
