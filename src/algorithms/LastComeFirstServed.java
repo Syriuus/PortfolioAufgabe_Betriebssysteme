@@ -1,15 +1,11 @@
 package algorithms;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 
 import util.Calculate;
 import util.SimulatedProcess;
 
 public class LastComeFirstServed {
-
-	private static int passedTime = 0;
 
 	public static ArrayList<Character> order(ArrayList<SimulatedProcess> processList) {
 		ArrayList<Character> IDOutputListe = new ArrayList<>();

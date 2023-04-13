@@ -1,9 +1,6 @@
 package algorithms;
 
 import java.util.ArrayList;
-import java.util.Collections;
-
-import util.AttributeComparator;
 import util.Calculate;
 import util.SimulatedProcess;
 
