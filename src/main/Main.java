@@ -3,6 +3,7 @@ package main;
 import java.util.ArrayList;
 
 import algorithms.*;
+import gui.GUI;
 import util.RandomTasks;
 import util.SimulatedProcess;
 
@@ -32,6 +33,7 @@ public class Main {
 		}
 
 		// Input-Ausgabe -> ID, Laufzeit, Prio, Arrival
+		GUI.getGUI();
 
 	}
 
