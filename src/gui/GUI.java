@@ -9,7 +9,6 @@ import gui.button.Buttons;
 import gui.label.Labels;
 import gui.schedulerSelector.SchedulerSelector;
 import gui.table.Table;
-import gui.table.tableModel.TableModel;
 import gui.textField.TextField;
 import util.SimulatedProcess;
 
@@ -29,7 +28,6 @@ public static JFrame getGUI() throws Exception {
 		generateFrame();
 		SchedulerSelector.generateSchedulerSelector();
 		Labels.generateLabel();
-		TableModel.initTableModel();
 		Table.generateTable();
 		Buttons.generateButtons();
 		TextField.generateTextfield();

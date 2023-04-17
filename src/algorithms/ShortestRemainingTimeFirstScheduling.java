@@ -6,9 +6,10 @@ import util.Calculate;
 
 public class ShortestRemainingTimeFirstScheduling
 {
-	public static ArrayList<Character> order(ArrayList<SimulatedProcess> processList)
+	public static ArrayList<Character> order(ArrayList<SimulatedProcess> List)
 	{
 	ArrayList<Character> IDOutputListe = new ArrayList<>();
+	ArrayList<SimulatedProcess> processList = Calculate.duplicateList(List);
 	int Systemtime = 0;
 	
 	int MaxSystemtime = Calculate.MaxSystemtime(processList);

@@ -11,6 +11,7 @@ public class Table {
 	private static JTable table;
 	
 	public static void generateTable() {
+		TableModel.initTableModel();
 		table = new JTable(TableModel.getTableModel()) {
 			private static final long serialVersionUID = 1L;
 			public boolean isCellEditable(int row, int column) {                

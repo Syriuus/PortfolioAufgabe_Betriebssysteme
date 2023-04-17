@@ -6,9 +6,10 @@ import util.Calculate;
 import util.SimulatedProcess;
 
 public class RoundRobinScheduling {
-	public static ArrayList<Character> order(ArrayList<SimulatedProcess> processList) {
+	public static ArrayList<Character> order(ArrayList<SimulatedProcess> List) {
 
 		ArrayList<Character> IDOutputListe = new ArrayList<>();
+		ArrayList<SimulatedProcess> processList = Calculate.duplicateList(List);
 		ArrayList<SimulatedProcess> RoundRobinListe = new ArrayList<>();
 		int Systemtime = 0;
 		int MaxSystemtime = Calculate.MaxSystemtime(processList);

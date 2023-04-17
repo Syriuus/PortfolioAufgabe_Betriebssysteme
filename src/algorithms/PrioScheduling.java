@@ -7,9 +7,12 @@ import util.AttributeComparator;
 import util.SimulatedProcess;
 
 public class PrioScheduling{
-	public static ArrayList<SimulatedProcess> order(ArrayList<SimulatedProcess> List) {
-		
+	public static ArrayList<Character> order(ArrayList<SimulatedProcess> List) {
+		ArrayList<Character> sortedList = new ArrayList<>();
 		Collections.sort(List, new AttributeComparator(3));
-		return List;
+		for(SimulatedProcess i : List) {
+			sortedList.add(i.getId());
+		}
+		return sortedList;
 	}
 }

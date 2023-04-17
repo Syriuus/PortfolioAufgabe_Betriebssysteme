@@ -15,7 +15,4 @@ public class TableModel {
 	public static DefaultTableModel getTableModel() {
 		return tableModel;
 	}
-	
-	
-
 }

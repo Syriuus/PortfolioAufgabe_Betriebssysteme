@@ -23,5 +23,7 @@ public class GenerateTasksButtonEvent {
 			Object[] obj = {i.getId(), i.getRuntime(), i.getArrivaltime(), i.getPriority(), i.getDeadline()};
 			TableModel.getTableModel().addRow(obj);
 		}
+		
+		
 	}
 }

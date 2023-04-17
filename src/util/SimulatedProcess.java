@@ -20,6 +20,15 @@ public class SimulatedProcess {
 		this.deadline = Deadline;
 	}
 
+	public SimulatedProcess(SimulatedProcess s) {
+		this.id = s.getId();
+		this.runtime = s.getRuntime();
+		this.priority = s.getPriority();
+		this.arrivaltime = s.getArrivaltime();
+		this.remainingRuntime = s.getRemainingRuntime();
+		this.deadline = s.getDeadline();
+	}
+
 	public int getRemainingRuntime() {
 		return remainingRuntime;
 	}

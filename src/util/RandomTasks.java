@@ -9,6 +9,7 @@ public static ArrayList<SimulatedProcess> getRandom(int count) throws Exception 
 		ArrayList<SimulatedProcess> ProcessList = new ArrayList<SimulatedProcess>();
 		Random random = new Random();
 		int total_arrival_time = 0;
+		int test = 0;
 		
 		if(count<= 0 || count > 26) {
 			throw new IndexOutOfBoundsException("Bitte gebe eine zahl zwischen 1 und 26 an");
@@ -19,13 +20,15 @@ public static ArrayList<SimulatedProcess> getRandom(int count) throws Exception 
 			int randomPriority = random.nextInt(1, 20);
 			int randomDeadline = random.nextInt(8, 40);
 			ProcessList.add(new SimulatedProcess((char) (i + 65), randomRuntime, randomPriority, total_arrival_time, randomDeadline));
-			if(randomRuntime < 8) {
-				total_arrival_time += random.nextInt(0, randomRuntime);
+			if(randomRuntime < 8 && randomRuntime > 1) {
+				total_arrival_time += random.nextInt(1, randomRuntime);
 			}
 			else {
 				total_arrival_time += random.nextInt(1, 7);
 			}
+			test += randomRuntime;
 		}
+		System.out.println(test);
 		return ProcessList;
 	}
 

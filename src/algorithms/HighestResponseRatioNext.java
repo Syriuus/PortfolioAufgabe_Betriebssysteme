@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import util.Calculate;
 import util.SimulatedProcess;
 
 public class HighestResponseRatioNext {
@@ -12,11 +13,12 @@ public class HighestResponseRatioNext {
 	private static Double passedTime = 0.0d;
 	private static Double answerQuotient = 0.0d;
 	
-	public static ArrayList<SimulatedProcess> order(ArrayList<SimulatedProcess> List) {
+	public static ArrayList<Character> order(ArrayList<SimulatedProcess> List) {
+		ArrayList<SimulatedProcess> processList = Calculate.duplicateList(List);
 		HashMap<SimulatedProcess, Double> aqMap = new HashMap<SimulatedProcess, Double>();
-		ArrayList<SimulatedProcess> sortedList = new ArrayList<>();
-		while(!List.isEmpty()) {
-			for(SimulatedProcess i : List) {
+		ArrayList<Character> sortedList = new ArrayList<>();
+		while(!processList .isEmpty()) {
+			for(SimulatedProcess i : processList ) {
 				answerQuotient = (i.getRuntime() + (passedTime - i.getArrivaltime()))/i.getRuntime();
 				aqMap.put(i, answerQuotient);
 				// System.out.println(i + "   " + answerQuotient);
@@ -24,8 +26,8 @@ public class HighestResponseRatioNext {
 			// System.out.println("---------------");
 			SimulatedProcess key = Collections.max(aqMap.entrySet(), Map.Entry.comparingByValue()).getKey();
 			aqMap.clear();
-			sortedList.add(key);
-			List.remove(key);
+			sortedList.add(key.getId());
+			processList .remove(key);
 			passedTime += key.getRuntime();
 		}
 		

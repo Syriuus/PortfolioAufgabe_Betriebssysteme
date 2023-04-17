@@ -12,6 +12,7 @@ public class SchedulerSelector {
 	
 	@SuppressWarnings("rawtypes")
 	private static JComboBox schedulerSelector;
+	private static SchedulerMode schedulerMode;
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void generateSchedulerSelector() {
@@ -20,5 +21,10 @@ public class SchedulerSelector {
 		schedulerSelector.setModel(new DefaultComboBoxModel(SchedulerMode.values()));
 		schedulerSelector.setBounds(70, 18, 457, 21);
 		GUI.getMainFrame().getContentPane().add(schedulerSelector);
+	}
+	
+	public static SchedulerMode getMode() {
+		schedulerMode = (SchedulerMode) schedulerSelector.getSelectedItem();
+		return schedulerMode;
 	}
 }
