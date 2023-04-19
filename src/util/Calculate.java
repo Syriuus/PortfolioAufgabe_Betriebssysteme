@@ -21,7 +21,9 @@ public class Calculate {
 	    boolean ProcessArrived = false;
 		for(SimulatedProcess i: processList) 
 		{
-			if(i.getArrivaltime() == Systemtime) ProcessArrived = true;
+			if(i.getArrivaltime() <= Systemtime) {
+				ProcessArrived = true;
+			}
 		}
 				return ProcessArrived;
 	}

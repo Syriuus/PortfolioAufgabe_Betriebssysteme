@@ -33,7 +33,7 @@ public class PräemptivEDFScheduling {
 	
 	private static SimulatedProcess CalculateNextProcess(ArrayList<SimulatedProcess> processList, int Systemtime )
 	{		
-		SimulatedProcess NextProcess = new SimulatedProcess('x',100,0,0,0);	//IdleProcess
+		SimulatedProcess NextProcess = new SimulatedProcess('x',100,0,0,100);	//IdleProcess
 	for(SimulatedProcess j: processList) {
 				if (j.getArrivaltime() > Systemtime) continue;				
 				if (j.getDeadline() < NextProcess.getDeadline())	NextProcess = j;

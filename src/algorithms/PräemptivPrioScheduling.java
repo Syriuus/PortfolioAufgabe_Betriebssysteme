@@ -33,7 +33,7 @@ public class PräemptivPrioScheduling {
 	{
 		
 		if(i.getArrivaltime() > Systemtime) continue;				
-		if(i.getPriority() > NextProcess.getPriority()); NextProcess = i;				
+		if(i.getPriority() > NextProcess.getPriority()) NextProcess = i;				
 	
 	}
 	return NextProcess;

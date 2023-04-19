@@ -26,7 +26,9 @@ public class HighestResponseRatioNext {
 			// System.out.println("---------------");
 			SimulatedProcess key = Collections.max(aqMap.entrySet(), Map.Entry.comparingByValue()).getKey();
 			aqMap.clear();
-			sortedList.add(key.getId());
+			for(int i = 0; i<key.getRuntime(); i++) {
+				sortedList.add(key.getId());
+			}
 			processList .remove(key);
 			passedTime += key.getRuntime();
 		}
