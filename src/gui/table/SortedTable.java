@@ -21,9 +21,15 @@ public class SortedTable {
 		CellCalculator.calculateCellNumber(sortedList);
 		SortedTableModel.generateSortedTableModel();
 		
-		table = new JTable(SortedTableModel.getSortedTableModel());
+		table = new JTable(SortedTableModel.getSortedTableModel()){
+			private static final long serialVersionUID = 1L;
+			public boolean isCellEditable(int row, int column) {                
+                return false;               
+			};
+		};
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.setRowSelectionAllowed(false);
+		table.setCellSelectionEnabled(false);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		for(int i = 0; i<CellCalculator.getCount(); i++) {
 			Character c = CellCalculator.getCharacters().get(i);

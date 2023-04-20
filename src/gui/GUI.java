@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Container;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -16,7 +17,7 @@ public class GUI {
 	private static JFrame mainFrame;
 	
 	private static String fontType = "Tahoma";
-	private static String guiName = "PenGUIn";
+	private static String guiName = "Scheduler Simulation GUI";
 	private static String col[] = {"ID","Runtime", "Arrivaltime", "Priority", "Deadline"};
 	
 	private static ArrayList<SimulatedProcess> randomList = null;
@@ -52,6 +53,9 @@ public static JFrame getGUI() throws Exception {
 
 	public static void setRandomList(ArrayList<SimulatedProcess> randomList) {
 		GUI.randomList = randomList;
+	}
+	public static Container getContentPane() {
+		return mainFrame.getContentPane();
 	}
 	
 	private static void generateFrame() {

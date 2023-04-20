@@ -1,5 +1,8 @@
 package gui.button.buttonEvents;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import gui.GUI;
 import gui.table.Table;
 import gui.table.tableModel.TableModel;
@@ -9,12 +12,27 @@ import util.SimulatedProcess;
 
 public class GenerateTasksButtonEvent {
 	
+	private static Integer numberOfProcesses;
+	
 	public static void generateTasksButton() {
-		Integer numberOfProcesses = Integer.parseInt(TextField.getTextFieldContent());
 		try {
-			GUI.setRandomList(RandomTasks.getRandom(numberOfProcesses));
-		} catch (Exception e1) {
-			System.out.println("Error");
+			numberOfProcesses = Integer.parseInt(TextField.getTextFieldContent());
+		}
+		catch(NumberFormatException e){
+			JOptionPane.showMessageDialog(new JFrame(), TextField.getText(), "Error",
+			        JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		if(numberOfProcesses <= 26 && numberOfProcesses > 0) {
+			try {
+				GUI.setRandomList(RandomTasks.getRandom(numberOfProcesses));
+			} catch (Exception e) {
+				
+			}
+		} else {
+			JOptionPane.showMessageDialog(new JFrame(), TextField.getText(), "Error",
+			        JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 		Table.getTable().setBounds(10, 100, 516, 16*numberOfProcesses+16);
 		TableModel.getTableModel().setRowCount(0);

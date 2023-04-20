@@ -3,13 +3,14 @@ package gui;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 
+import gui.schedulerSelector.SchedulerSelector;
 import gui.table.SortedTable;
 
 import javax.swing.BoxLayout;
 
 public class SortedListGUI {
 
-	private static String sortedGUIName = "Sorted Tasks";
+	private static String sortedGUIName = "Sorted Tasks " + SchedulerSelector.getMode();
 	private static JFrame sortedFrame;
 	
 	/**

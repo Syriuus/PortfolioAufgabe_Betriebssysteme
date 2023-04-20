@@ -1,6 +1,8 @@
 package gui.textField;
 
 import java.awt.Font;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.JTextField;
 
@@ -17,10 +19,26 @@ public class TextField {
 		numberBoundariesTextfield.setFont(new Font(GUI.getFontType(), Font.PLAIN, 12));
 		numberBoundariesTextfield.setText(textFieldText);
 		numberBoundariesTextfield.setBounds(129, 50, 214, 19);
+		numberBoundariesTextfield.addFocusListener(new FocusListener() {
+
+
+			public void focusGained(FocusEvent e) {
+				numberBoundariesTextfield.setText(""); 
+			}
+
+
+			public void focusLost(FocusEvent e) {
+
+			}
+
+			});  
 		GUI.getMainFrame().getContentPane().add(numberBoundariesTextfield);
 	}
 	
 	public static String getTextFieldContent() {
 		return numberBoundariesTextfield.getText();
+	}
+	public static String getText() {
+		return textFieldText;
 	}
 }
