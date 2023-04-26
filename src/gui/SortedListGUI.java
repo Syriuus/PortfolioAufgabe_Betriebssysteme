@@ -18,6 +18,7 @@ public class SortedListGUI {
 	 */
 	public static void openSortedGUI(ArrayList<Character> sortedList) {
 		
+		sortedGUIName = "Sorted Tasks " + SchedulerSelector.getMode();
 		sortedFrame = new JFrame(sortedGUIName);
 		sortedFrame.setSize(1000, 100);
 		sortedFrame.getContentPane().setLayout(new BoxLayout(sortedFrame.getContentPane(), BoxLayout.X_AXIS));
